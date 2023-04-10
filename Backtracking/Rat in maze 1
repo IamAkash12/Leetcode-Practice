@@ -1,0 +1,25 @@
+class Solution {
+    public static ArrayList<String> findPath(int[][] m, int n) {
+        ArrayList<String> al = new ArrayList<>();
+        boolean [][] vis = new boolean [n][n];
+        path(m,0,0,vis,al,"");
+        return al;
+    }
+    public static void path(int[][]m, int i, int j, boolean[][]vis, ArrayList<String> al, String s){
+        if(i < 0 || j < 0 || i >=m.length || j>=m[0].length || vis[i][j]==true || m[i][j]==0) 
+            return ;
+            
+        if(i==m.length-1 && j==m.length-1){
+            al.add(s);
+        }
+        
+        vis[i][j]=true;
+       
+        path(m,i+1,j,vis,al,s+"D");//Down
+        path(m,i,j-1,vis,al,s+"L");//Left   
+        path(m,i,j+1,vis,al,s+"R");//Right
+        path(m,i-1,j,vis,al,s+"U");//UP
+        
+        vis[i][j]=false;
+    }
+}
